@@ -27,9 +27,14 @@ export default function Order() {
     }, [])
 
     const countUp = (id, newCount) => {
+
         console.log(id, newCount)
+        if (newCount <= 0) {
+            newCount = 0;
+        }
         setOrders(orders.map((e, i) => {
             if (i == id) {
+
                 return {...e, count: newCount}
             } else {
                 return e
@@ -39,6 +44,11 @@ export default function Order() {
         console.log(orders)
     }
 
+    const delItem = (idItem) => {
+        console.log("idItem", idItem);
+        setOrders(orders.filter((e, i) => i !== Number.parseInt(idItem)))
+
+    }
 
     return (
 
@@ -48,15 +58,18 @@ export default function Order() {
             </div>
             <table>
                 <thead>
-                <td>Фото:</td>
-                <td>Наименование:</td>
-                <td>Цена:</td>
-                <td>Количество:</td>
-                <td>del</td>
-                <td>Сумма:</td>
+                <tr>
+                    <td>Фото:</td>
+                    <td>Наименование:</td>
+                    <td>Цена:</td>
+                    <td>Количество:</td>
+                    <td>del</td>
+                    <td>Сумма:</td>
+                </tr>
                 </thead>
                 <tbody>
-                {orders.map((o, i) => <OrderItem key={i} itemId={i} item={o} editCount={countUp}/>)}
+                {orders.map((o, i) => <OrderItem key={i} itemId={i} item={o} delItem={delItem} count={o.count}
+                                                 editCount={countUp}/>)}
                 </tbody>
                 <tfoot>
                 <tr>
