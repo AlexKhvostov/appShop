@@ -1,0 +1,46 @@
+.navbar {
+    border-radius: 10px;
+    margin: 0 0 20px 0;
+}
+
+.container {
+    border-radius: 10px;
+}
+
+a{
+    color: #4ab0f3;
+}
+
+td{
+    color: darkkhaki;
+}
+
+thead tr td{
+    color: #e7da2f;
+}
+
+.container{
+    margin-top: 10px;
+    width: 600px;
+}
+
+.content{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+tr{
+    border-bottom: darkkhaki 2px solid;
+}
+
+table{
+    border-top : darkkhaki 2px solid;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+thead{
+    color: darkkhaki;
+    font-size: 120%;
+}
+
