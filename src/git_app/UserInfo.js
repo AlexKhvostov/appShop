@@ -46,13 +46,16 @@ export default function UserInfo() {
             <thead>
             <tr>
                 <td>Ссылка:</td>
+                <td>Дата создания:</td>
                 <td>Время обновления:</td>
             </tr>
             </thead>
             <tbody>
             {repsInfo.map((rep, ind) => {
-                    return (<tr key={ind}>
+                    return (
+                        <tr key={ind}>
                             <td key={ind + "link"}><Link to={`/AlexKhvostov/${rep.name}`}>{rep.name}</Link></td>
+                            <td key={ind + "create"}>{rep.created_at}</td>
                             <td key={ind + "time"}>{rep.updated_at}</td>
                         </tr>
                     )

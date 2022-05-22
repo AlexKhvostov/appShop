@@ -20,7 +20,7 @@ root.render(
                 </div>
             </nav>
 
-            <div className="content bg-dark bg-gradient">
+            <div className="content bg-dark bg-gradient ">
                 <Routes>
 
                     <Route path="/" element={<UserInfo />} />
