@@ -12,15 +12,18 @@ export default function Form() {
             lastName: '',
             email: '',
             password: '',
-            password2: '',
-            message: ""
-
+            passwordConfirm: '',
+            message: ''
         },
 
         validationSchema: Yup.object({
             firstName: Yup.string()
                 .min(3, "Имя должно быть более 2 букв")
                 .max(10, 'Имя должно быть менее 10 букв')
+                .test('mit','Не должно быть цифир! ) ', (value)=>{
+
+                    return   value;
+                })
                 .required('Обязательное поле'),
             lastName: Yup.string()
                 .min(3, "Должно быть более 2 букв")
@@ -32,10 +35,8 @@ export default function Form() {
             password: Yup.string()
                 .min(5, 'Должно быть более 5 симвалов')
                 .required('Обязательное поле'),
-            password2: Yup.string()
-                .max(0, 'Должно совпадать с паролем')
-                .required('Обязательное поле'),
-
+            passwordConfirm: Yup.string()
+                    .oneOf([Yup.ref('password'), null], 'Passwords must match'),
             message: Yup.string()
                 .min(10, "Сообщение должно быть более 10 симвалов")
         }),
@@ -141,22 +142,22 @@ export default function Form() {
                     </div>
 
                     <div className="col-md-12">
-                        <label htmlFor="password2" className="form-label">Confirm Password</label>
+                        <label htmlFor="passwordConfirm" className="form-label">Confirm Password</label>
                         <div className="input-group has-validation">
 
-                            <input id="password2"
-                                   name="password2"
+                            <input id="passwordConfirm"
+                                   name="passwordConfirm"
                                    type="text"
                                    onChange={formik.handleChange}
                                    onBlur={formik.handleBlur}
-                                   value={formik.values.password2}
-                                   className={formik.touched.password2 && formik.errors.password2 ? "form-control is-invalid"
-                                       : formik.touched.password2
+                                   value={formik.values.passwordConfirm}
+                                   className={formik.touched.passwordConfirm && formik.errors.passwordConfirm ? "form-control is-invalid"
+                                       : formik.touched.passwordConfirm
                                            ? "form-control is-valid" : "form-control"}
                             />
                         </div>
-                        {formik.touched.password2 && formik.errors.password2 ? (
-                            <div className="errors">{formik.errors.password2}</div>
+                        {formik.touched.passwordConfirm && formik.errors.passwordConfirm ? (
+                            <div className="errors">{formik.errors.passwordConfirm}</div>
                         ) : null}
                     </div>
 
