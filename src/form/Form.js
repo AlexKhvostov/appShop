@@ -22,7 +22,7 @@ export default function Form() {
                 .max(10, 'Имя должно быть менее 10 букв')
                 .test('mit','Не должно быть цифир! ) ', (value)=>{
 
-                    return   value;
+                    return    value.includes(" ");
                 })
                 .required('Обязательное поле'),
             lastName: Yup.string()
