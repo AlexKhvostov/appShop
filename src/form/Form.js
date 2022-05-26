@@ -12,19 +12,32 @@ export default function Form() {
             lastName: '',
             email: '',
             password: '',
+            password2: '',
+            message: ""
+
         },
 
         validationSchema: Yup.object({
             firstName: Yup.string()
-                .max(15, 'Must be 15 characters or less')
-                .required('Required'),
+                .min(3, "Имя должно быть более 2 букв")
+                .max(10, 'Имя должно быть менее 10 букв')
+                .required('Обязательное поле'),
             lastName: Yup.string()
-                .max(20, 'Must be 20 characters or less')
-                .required('Required'),
-            email: Yup.string().email('Invalid email address').required('Required'),
+                .min(3, "Должно быть более 2 букв")
+                .max(10, 'Должно быть менее 10 букв')
+                .required('Обязательное поле'),
+            email: Yup.string()
+                .email('Введите верный email')
+                .required('Обязательное поле'),
             password: Yup.string()
-                .max(20, 'Must be 20 characters or less')
-                .required('Required'),
+                .min(5, 'Должно быть более 5 симвалов')
+                .required('Обязательное поле'),
+            password2: Yup.string()
+                .max(0, 'Должно совпадать с паролем')
+                .required('Обязательное поле'),
+
+            message: Yup.string()
+                .min(10, "Сообщение должно быть более 10 симвалов")
         }),
 
         onSubmit: values => {
@@ -35,70 +48,147 @@ export default function Form() {
     return (
 
         <React.Fragment>
-            <h2>SIGNUP</h2>
-            <hr/>
+            <div className="formHeader">
+                <h4> Bootstrap 4 Form Validation Demo</h4>
+            </div>
 
-            <form className="row g-3" onSubmit={formik.handleSubmit}>
 
-                <div className="col-md-6">
-                    <label htmlFor="firstName" className="form-label">First Name</label>
-                    <div className="input-group has-validation">
-                        <span className="input-group-text" id="inputGroupPrepend3">F</span>
-                        <input
-                            id="firstName"
-                            name="firstName"
-                            type="text"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.firstName}
-                            className={formik.touched.firstName && formik.errors.firstName ? "form-control is-invalid"
-                                : formik.touched.firstName
-                                    ? "form-control is-valid" : "form-control"}
-                            required
-                        />
-                            {formik.touched.firstName && formik.errors.firstName ? (
-                            <div>{formik.errors.firstName}</div>
+            <div className="formBody">
+                <form className="row g-3" onSubmit={formik.handleSubmit}>
+
+                    <div className="col-md-12">
+                        <label htmlFor="firstName" className="form-label">Name</label>
+                        <div className="input-group has-validation">
+
+                            <input
+                                id="firstName"
+                                name="firstName"
+                                type="text"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.firstName}
+                                className={formik.touched.firstName && formik.errors.firstName ? "form-control is-invalid"
+                                    : formik.touched.firstName
+                                        ? "form-control is-valid" : "form-control"}
+
+                            />
+
+                        </div>
+                        {formik.touched.firstName && formik.errors.firstName ? (
+                            <div className="errors">{formik.errors.firstName}</div>
                         ) : null}
                     </div>
-                </div>
-                <div className="col-md-6">
-                    <label htmlFor="LastName" className="form-label">Last Name</label>
-                    <div className="input-group has-validation">
-                        <span className="input-group-text" id="inputGroupPrepend3">L</span>
-                        <input type="text" className="form-control" id="LastName" name="LastName" required/>
-                    </div>
-                </div>
-                <div className="col-md-12">
-                    <label htmlFor="EmailAddress" className="form-label">Email address</label>
-                    <div className="input-group has-validation">
-                        <span className="input-group-text" id="inputGroupPrepend3">e</span>
-                        <input type="text" className="form-control" id="EmailAddress" name="EmailAddress" required/>
-                    </div>
-                </div>
-                <div className="col-md-12">
-                    <label htmlFor="Password" className="form-label">Password</label>
-                    <div className="input-group has-validation">
-                        <span className="input-group-text" id="inputGroupPrepend3">p</span>
-                        <input type="text" className="form-control" id="Password" name="Password" required/>
-                    </div>
-                </div>
-                <div className="col-md-12">
-                    <label htmlFor="ConfirmPassword" className="form-label">Confirm Password</label>
-                    <div className="input-group has-validation">
-                        <span className="input-group-text" id="inputGroupPrepend3">cp</span>
-                        <input type="text" className="form-control" id="ConfirmPassword" name="ConfirmPassword"
-                               required/>
-                    </div>
-                </div>
+                    <div className="col-md-12">
+                        <label htmlFor="lastName" className="form-label">Username</label>
+                        <div className="input-group has-validation">
+
+                            <input
+                                id="lastName"
+                                name="lastName"
+                                type="text"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.lastName}
+                                className={formik.touched.lastName && formik.errors.lastName ? "form-control is-invalid"
+                                    : formik.touched.lastName
+                                        ? "form-control is-valid" : "form-control"}
+                            />
 
 
-                <div className="col-12">
-                    <button className="btn btn-primary" type="submit">SIGN-UP</button>
-                </div>
+                        </div>
+                        {formik.touched.lastName && formik.errors.lastName ? (
+                            <div className="errors">{formik.errors.lastName}</div>
+                        ) : null}
+                    </div>
+                    <div className="col-md-12">
+                        <label htmlFor="email" className="form-label">Email address</label>
+                        <div className="input-group has-validation">
 
-                {/*is-invalid
+                            <input id="email"
+                                   name="email"
+                                   type="text"
+                                   onChange={formik.handleChange}
+                                   onBlur={formik.handleBlur}
+                                   value={formik.values.email}
+                                   className={formik.touched.email && formik.errors.email ? "form-control is-invalid"
+                                       : formik.touched.email
+                                           ? "form-control is-valid" : "form-control"}
+                            />
+                        </div>
+                        {formik.touched.email && formik.errors.email ? (
+                            <div className="errors">{formik.errors.email}</div>
+                        ) : null}
+                    </div>
+                    <div className="col-md-12">
+                        <label htmlFor="password" className="form-label">Password</label>
+                        <div className="input-group has-validation">
+
+                            <input id="password"
+                                   name="password"
+                                   type="text"
+                                   onChange={formik.handleChange}
+                                   onBlur={formik.handleBlur}
+                                   value={formik.values.password}
+                                   className={formik.touched.password && formik.errors.password ? "form-control is-invalid"
+                                       : formik.touched.password
+                                           ? "form-control is-valid" : "form-control"}
+                            />
+                        </div>
+                        {formik.touched.password && formik.errors.password ? (
+                            <div className="errors">{formik.errors.password}</div>
+                        ) : null}
+
+                    </div>
+
+                    <div className="col-md-12">
+                        <label htmlFor="password2" className="form-label">Confirm Password</label>
+                        <div className="input-group has-validation">
+
+                            <input id="password2"
+                                   name="password2"
+                                   type="text"
+                                   onChange={formik.handleChange}
+                                   onBlur={formik.handleBlur}
+                                   value={formik.values.password2}
+                                   className={formik.touched.password2 && formik.errors.password2 ? "form-control is-invalid"
+                                       : formik.touched.password2
+                                           ? "form-control is-valid" : "form-control"}
+                            />
+                        </div>
+                        {formik.touched.password2 && formik.errors.password2 ? (
+                            <div className="errors">{formik.errors.password2}</div>
+                        ) : null}
+                    </div>
+
+                    <div className="col-md-12">
+                        <label htmlFor="message" className="form-label">Message</label>
+                        <div className="input-group has-validation">
+
+                            <textarea
+                                id="message"
+                                name="message"
+                                type="text"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.message}
+                                className={formik.touched.message && formik.errors.message ? "form-control is-invalid"
+                                    : formik.touched.message
+                                        ? "form-control is-valid" : "form-control"}
+                                rows="3" />
+
+                        </div>
+                        {formik.touched.message && formik.errors.message ? (
+                            <div className="errors">{formik.errors.message}</div>
+                        ) : null}
+                    </div>
+                    <div className="col-12">
+                        <button className="btn btn-primary" type="submit">SIGN-UP</button>
+                    </div>
+
+                    {/*is-invalid
                    is-valid*/}
-            </form>
+                </form>
+            </div>
 
         </React.Fragment>
     )

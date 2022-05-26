@@ -9,12 +9,9 @@ import Form from "./form/Form";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
     <React.StrictMode>
-
-
         <BrowserRouter>
-            <div className="content bg-dark bg-gradient ">
+            <div className="content">
                 <Routes>
 
                     <Route path="/" element={<Form />} />
@@ -22,7 +19,6 @@ root.render(
 
                 </Routes>
             </div>
-
         </BrowserRouter>
     </React.StrictMode>
 );
